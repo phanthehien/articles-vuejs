@@ -27,7 +27,7 @@
       <th>Actions</th>
       </thead>
       <tbody class="article-body">
-      <tr v-for="article in articles" :key="article.id">
+      <tr v-for="article in currentArticles" :key="article.id">
         <td data-label="Title"> {{ article.title }} </td>
         <td data-label="Content"> {{ article.shortContent }} </td>
         <td data-label="Author"> {{ article.author }} </td>
@@ -45,7 +45,7 @@
       </tbody>
     </table>
 
-    <div class="pagination">
+    <div class="pagination" @click="handlePaginationClick">
       <div class="article-number-select">
         <button class="pagination-label-btn">{{ numberOfListLabel }}</button>
         <div class="dropdown-content">
