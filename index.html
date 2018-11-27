@@ -8,8 +8,30 @@
   <link rel="stylesheet" href="css/style.css">
   <script src="src/core/util.js"></script>
   <script src="src/core/seed.js"></script>
+  <script src="src/component/list.js"></script>
+  <script src="src/component/create.js"></script>
 </head>
 <body>
+
+<template id="articleCreate">
+  <div class="tableArticle">
+    <form>
+      <label>Title</label>
+      <input class="title" name="title" type="text" :value="title">
+
+      <label>Content</label>
+      <textarea class="content" name="content">{{content}}</textarea>
+
+      <label>Author</label>
+      <input class="author" name="author" type="text" :value="author">
+
+      <label>Email</label>
+      <input class="email" name="email" type="text" :value="email">
+
+      <input class="submit-article-btn" type="button" value="Create">
+    </form>
+  </div>
+</template>
 
 <template id="articleList">
   <div>
@@ -71,9 +93,9 @@
   </div>
 </template>
 
-
 <div id="app">
-  <article-component :articles="articles"></article-component>
+  <div :is="currentComponent" :articles="articles"></div>
+  <article-list-component :articles="articles"></article-list-component>
 </div>
 
 <script src="src/index.js"></script>
