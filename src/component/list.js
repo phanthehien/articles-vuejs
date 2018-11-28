@@ -4,21 +4,19 @@ Vue.component(
     template: '#articleList',
     data() {
       return {
-        numberOfList: 2,
-        pagingValues: [1, 2, 3, 5, 7, 9],
-        currentPaging: 0
+        pagingValues: [1, 2, 3, 5, 7, 9]
       }
     },
-    props: ['articles', 'change_screen'],
+    props: ['articles', 'change_screen', 'current_paging', 'number_of_list', 'update_paging'],
     computed: {
       numberOfListLabel() {
-        return `Number of Items: ${this.numberOfList}`;
+        return `Number of Items: ${this.number_of_list}`;
       },
       paginationItems() {
         const paginationItems = [];
 
-        if (this.articles && this.numberOfList) {
-          const numberOfPaging = Math.ceil(this.articles.length / this.numberOfList);
+        if (this.articles && this.number_of_list) {
+          const numberOfPaging = Math.ceil(this.articles.length / this.number_of_list);
 
           for (let i = 0; i < numberOfPaging; i += 1) {
             paginationItems.push(i + 1);
@@ -28,8 +26,8 @@ Vue.component(
         return paginationItems;
       },
       currentArticles() {
-        const skip = this.currentPaging * this.numberOfList;
-        const endIndex = Math.min(skip + this.numberOfList, this.articles.length);
+        const skip = this.current_paging * this.number_of_list;
+        const endIndex = Math.min(skip + this.number_of_list, this.articles.length);
 
         const articleData = this.articles.slice(skip, endIndex).map((article) => {
           const newArticle = article;
@@ -56,10 +54,12 @@ Vue.component(
         this.change_screen('article-edit-component', article);
       },
       handleActions: function() {
-        if (event.target.dataset) {
+        if (event.target && event.target.dataset) {
           const { id, action } = event.target.dataset;
           const article = this.articles.find(article => article.id === id);
+
           switch (action) {
+            case 'actionViewRow':
             case 'actionView':
               this.switchToView(article);
               break;
@@ -83,12 +83,18 @@ Vue.component(
 
           switch (action) {
             case 'actionDropdown':
-              this.numberOfList = parseInt(index);
-              this.currentPaging = 0;
+              this.update_paging({
+                numberOfList: parseInt(index),
+                currentPaging: 0
+              });
               break;
 
             case 'actionPagination':
-              this.currentPaging = parseInt(index - 1);
+              this.update_paging({
+                numberOfList: this.number_of_list,
+                currentPaging: parseInt(index - 1)
+              });
+
               break;
 
             default:

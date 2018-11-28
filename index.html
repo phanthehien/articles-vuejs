@@ -52,17 +52,22 @@
             <th>Author</th>
             <th>Email</th>
             <th>Updated</th>
-            <th>ViewCount</th>
+            <th>View</th>
             <th>Actions</th>
             </thead>
             <tbody class="article-body">
-            <tr v-for="article in currentArticles" :key="article.id">
+            <tr v-for="article in currentArticles"
+                :key="article.id"
+                :data-id="article.id"
+                data-action="actionViewRow"
+                @click.capture="handleActions"
+            >
                 <td data-label="Title">{{article.title}}</td>
                 <td data-label="Content">{{article.shortContent}}</td>
                 <td data-label="Author">{{article.author}}</td>
                 <td data-label="Email">{{article.email}}</td>
                 <td data-label="Updated">{{article.updatedDate}}</td>
-                <td data-label="ViewCount">{{article.viewCount}}</td>
+                <td data-label="View">{{article.viewCount}}</td>
                 <td data-label="Actions">
                     <span :data-id="article.id" data-action="actionView" class="action"> View </span>
                     <span :data-id="article.id" data-action="actionEdit" class="action"> Edit </span>
@@ -162,6 +167,9 @@
     <div :is="currentComponent"
          :articles="articles"
          :article="article"
+         :number_of_list="numberOfList"
+         :current_paging="currentPaging"
+         :update_Paging="updatePaging"
          :change_screen="changeScreen">
     </div>
 </div>
