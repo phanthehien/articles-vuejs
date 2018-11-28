@@ -2,12 +2,11 @@ new Vue({
   el: '#app',
   data: {
     articles: db.articles,
-    currentComponent: 'article-create-component'
+    currentComponent: 'article-list-component'
   },
   methods: {
-    swapComponent: function(component)
-    {
-      this.currentComponent = component;
+    changeScreen: function(screenComponent)  {
+      this.currentComponent = screenComponent;
     }
   }
 });

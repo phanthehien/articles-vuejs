@@ -9,7 +9,7 @@ Vue.component(
         currentPaging: 0
       }
     },
-    props: ['articles'],
+    props: ['articles', 'change_screen'],
     computed: {
       numberOfListLabel() {
         return `Number of Items: ${this.numberOfList}`;
@@ -46,7 +46,10 @@ Vue.component(
       }
     },
     methods: {
-      handlePaginationClick() {
+      switchToCreate: function() {
+        this.change_screen('article-create-component');
+      },
+      handlePaginationClick: function () {
         if (event.target.dataset) {
           const { index, action } = event.target.dataset;
 
