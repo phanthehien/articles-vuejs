@@ -111,31 +111,40 @@
             <input class="new-article-btn" type="button" value="Back to List" @click="switchToList"/>
         </div>
         <div class="panelArticle">
-            <label for="title-label">Title: </label>
-            <span id="title-label" v-model="article.title" name="title-label" type="text">{{article.title}}</span>
-            <br/>
+            <div class="panelItem">
+                <label for="title-label">Title: </label>
+                <span id="title-label" v-model="article.title" name="title-label" type="text">{{article.title}}</span>
+            </div>
 
-            <label for="content-label">Content: </label>
-            <span id="content-label" v-model="article.content" name="content-label"
-                  type="text">{{article.content}}</span>
-            <br/>
+            <div class="panelItem">
 
-            <label for="author-label">Author: </label>
-            <span id="author-label" v-model="article.author" name="author-label" type="text">{{article.author}}</span>
-            <br/>
+                <label for="content-label">Content: </label>
+                <span id="content-label" v-model="article.content" name="content-label"
+                      type="text">{{article.content}}</span>
+            </div>
+            <div class="panelItem">
 
-            <label for="email-label">Email: </label>
-            <span id="email-label" v-model="article.email" name="email-label" type="text">{{article.email}}</span>
-            <br/>
+                <label for="author-label">Author: </label>
+                <span id="author-label" v-model="article.author" name="author-label"
+                      type="text">{{article.author}}</span>
+            </div>
+            <div class="panelItem">
 
-            <label for="updated-date-label">Updated Date: </label>
-            <span id="updated-date-label" v-model="article.updatedDate" name="updated-date-label" type="text">{{article.updatedDate}}</span>
-            <br/>
+                <label for="email-label">Email: </label>
+                <span id="email-label" v-model="article.email" name="email-label" type="text">{{article.email}}</span>
+            </div>
+            <div class="panelItem">
+
+                <label for="updated-date-label">Updated Date: </label>
+                <span id="updated-date-label" v-model="article.updatedDate" name="updated-date-label" type="text">{{article.updatedDate}}</span>
+            </div>
+            <div class="panelItem">
 
 
-            <label for="view-count-label">View Count: </label>
-            <span id="view-count-label" v-model="article.viewCount" name="view-count-label" type="text">{{article.viewCount}}</span>
-            <br/>
+                <label for="view-count-label">View Count: </label>
+                <span id="view-count-label" v-model="article.viewCount" name="view-count-label" type="text">{{article.viewCount}}</span>
+            </div>
+
         </div>
     </div>
 </template>

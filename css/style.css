@@ -124,16 +124,21 @@ div.panelArticle {
     padding: 20px;
 }
 
-.panelArticle span {
-    font-weight: normal;
-}
-
 .panelArticle label {
     display: inline-block;
     padding: 5px;
     margin-bottom: 5px;
-    width: 200px;
+    width: 150px;
     font-weight: bold;
+}
+
+.panelArticle span {
+    font-weight: normal;
+}
+
+.panelItem {
+    display: inline-block;
+    width: 100%;
 }
 
 /*
@@ -290,6 +295,21 @@ input[type=button]:hover {
 
     input[type=button] {
         width: 95%;
+    }
+}
+
+@media screen and (max-width: 560px) {
+    .panelArticle label {
+        display: inline-block;
+        padding: 5px;
+        margin-bottom: 5px;
+        width: 100%;
+        font-weight: bold;
+    }
+
+    .panelArticle span {
+        font-weight: normal;
+        width: 100%;
     }
 }
 
