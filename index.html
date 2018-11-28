@@ -48,8 +48,9 @@
     <div class="panelNew">
       <input class="new-article-btn" type="button" value="Create Article" @click="switchToCreate"/>
     </div>
-    <table class="article-list" @click="handleActions">
+    <table class="article-list">
       <thead>
+      <th>#</th>
       <th>Title</th>
       <th>Content</th>
       <th>Author</th>
@@ -59,26 +60,26 @@
       <th>Actions</th>
       </thead>
       <tbody class="article-body">
-      <tr v-for="article in currentArticles"
-          :key="article.id"
-          :data-id="article.id"
-          data-action="actionViewRow"
-          @click.capture="handleActions"
-      >
-        <td data-label="Title">{{article.title}}</td>
-        <td data-label="Content">{{article.shortContent}}</td>
-        <td data-label="Author">{{article.author}}</td>
-        <td data-label="Email">{{article.email}}</td>
-        <td data-label="Updated">{{article.updatedDate}}</td>
-        <td data-label="View">{{article.viewCount}}</td>
-        <td data-label="Actions">
-          <span :data-id="article.id" data-action="actionView" class="action"> View </span>
-          <span :data-id="article.id" data-action="actionEdit" class="action"> Edit </span>
-          <span :data-id="article.id" data-action="actionDelete" class="action">
-              Delete
-            </span>
-        </td>
-      </tr>
+        <tr v-for="(article, index) in currentArticles"
+            :key="article.id"
+            :data-id="article.id"
+            data-action="actionViewRow"
+            @click="handleActions"
+        >
+          <td data-label="#">{{index + 1 + current_paging * number_of_list }}</td>
+          <td data-label="Title">{{article.title}}</td>
+          <td data-label="Content">{{article.shortContent}}</td>
+          <td data-label="Author">{{article.author}}</td>
+          <td data-label="Email">{{article.email}}</td>
+          <td data-label="Updated">{{article.updatedDate}}</td>
+          <td data-label="View">{{article.viewCount}}</td>
+          <td data-label="Actions">
+            <span :data-id="article.id" data-action="actionEdit" class="action"> Edit </span>
+            <span :data-id="article.id" data-action="actionDelete" class="action">
+                Delete
+              </span>
+          </td>
+        </tr>
       </tbody>
     </table>
 

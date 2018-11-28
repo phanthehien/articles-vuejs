@@ -66,11 +66,6 @@ Vue.component(
           const article = this.articles.find(article => article.id === id);
 
           switch (action) {
-            case 'actionViewRow':
-            case 'actionView':
-              this.switchToView(article);
-              break;
-
             case 'actionEdit':
               this.switchToEdit(article);
               break;
@@ -80,6 +75,21 @@ Vue.component(
               break;
 
             default:
+              if (event.currentTarget && event.currentTarget.dataset) {
+                const { id, action } = event.currentTarget.dataset;
+                const article = this.articles.find(article => article.id === id);
+
+                switch(action) {
+                  case 'actionViewRow':
+                  case 'actionView':
+                    this.switchToView(article);
+                    break;
+
+                  default:
+                    break
+                }
+
+              }
               break;
           }
         }
