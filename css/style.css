@@ -191,6 +191,9 @@ div.panelArticle {
     display: inline-block;
 }
 
+.error {
+    color: red;
+}
 
 /*
 /// --------------------------

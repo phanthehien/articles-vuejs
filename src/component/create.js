@@ -6,7 +6,8 @@ Vue.component(
       return {
         article: {
 
-        }
+        },
+        errorMessage: ''
       }
     },
     props: ['articles', 'change_screen', 'save_articles'],
@@ -23,7 +24,12 @@ Vue.component(
         } = this.article;
 
         if (!title || !content || !author || !email) {
-          alert('Please input all value');;
+          this.errorMessage = 'Please input all fields.';
+          return;
+        }
+
+        if (!util.validateEmail(email)) {
+          this.errorMessage = 'Your email is not correct. Please check again.';
           return;
         }
 
@@ -40,7 +46,8 @@ Vue.component(
         this.articles.unshift(article);
         this.save_articles();
         this.switchToList();
-      }
+      },
+
     }
   },
 

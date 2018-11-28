@@ -3,6 +3,11 @@ Vue.component(
   {
     template: '#articleEdit',
     props: ['articles', 'change_screen', 'article', 'save_articles'],
+    data() {
+      return {
+        errorMessage: ''
+      }
+    },
     methods: {
       switchToList: function() {
         this.change_screen('article-list-component');
@@ -16,7 +21,12 @@ Vue.component(
         } = this.article;
 
         if (!title || !content || !author || !email) {
-          alert('Please input all value');
+          this.errorMessage = 'Please input all fields.';
+          return;
+        }
+
+        if (!util.validateEmail(email)) {
+          this.errorMessage = 'Your email is not correct. Please check again.';
           return;
         }
 

@@ -37,6 +37,7 @@
         <label>Email</label>
         <input class="email" name="email" type="text" v-model="article.email">
 
+        <label class="error">{{errorMessage}}</label>
         <input class="submit-article-btn" type="button" value="Create" @click="createArticle">
       </form>
     </div>
@@ -166,6 +167,7 @@
       <label>Email</label>
       <input class="email" name="email" type="text" v-model="article.email">
 
+      <label class="error">{{errorMessage}}</label>
       <input class="submit-article-btn" type="button" value="Save Changes" @click="saveArticle">
     </div>
   </div>
