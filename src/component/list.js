@@ -49,6 +49,34 @@ Vue.component(
       switchToCreate: function() {
         this.change_screen('article-create-component');
       },
+      switchToView: function(article) {
+        this.change_screen('article-view-component', article);
+      },
+      switchToEdit: function(article) {
+        this.change_screen('article-edit-component', article);
+      },
+      handleActions: function() {
+        if (event.target.dataset) {
+          const { id, action } = event.target.dataset;
+          const article = this.articles.find(article => article.id === id);
+          switch (action) {
+            case 'actionView':
+              this.switchToView(article);
+              break;
+
+            case 'actionEdit':
+              this.switchToEdit(article);
+              break;
+
+            case 'actionDelete':
+              this.deleteArticle(article);
+              break;
+
+            default:
+              break;
+          }
+        }
+      },
       handlePaginationClick: function () {
         if (event.target.dataset) {
           const { index, action } = event.target.dataset;
@@ -66,6 +94,15 @@ Vue.component(
             default:
               break;
           }
+        }
+      },
+      deleteArticle(article) {
+        const { title, id } = article;
+        const result = confirm('are you sure to delete this article: \n ' +  title + ' ?');
+
+        if (result === true) {
+          const index = this.articles.findIndex(article => article.id === id);
+          this.articles.splice(index, 1);
         }
       }
     }

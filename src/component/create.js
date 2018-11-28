@@ -23,7 +23,7 @@ Vue.component(
         } = this.article;
 
         if (!title || !content || !author || !email) {
-          alert("Please input all value");
+          alert('Please input all value');;
           return;
         }
 
