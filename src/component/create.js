@@ -9,7 +9,7 @@ Vue.component(
         }
       }
     },
-    props: ['articles', 'change_screen'],
+    props: ['articles', 'change_screen', 'save_articles'],
     methods: {
       switchToList: function() {
         this.change_screen('article-list-component');
@@ -29,15 +29,16 @@ Vue.component(
 
         const article = {
           id: util.guid(),
-          title: encodeURI(title),
-          content: encodeURI(content),
-          author: encodeURI(author),
-          email: encodeURI(email),
+          title: title,
+          content: content,
+          author: author,
+          email: email,
           updatedDate: util.formatDate(new Date()),
           viewCount: 0
         };
 
         this.articles.unshift(article);
+        this.save_articles();
         this.switchToList();
       }
     }

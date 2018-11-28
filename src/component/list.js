@@ -7,7 +7,14 @@ Vue.component(
         pagingValues: [1, 2, 3, 5, 7, 9]
       }
     },
-    props: ['articles', 'change_screen', 'current_paging', 'number_of_list', 'update_paging'],
+    props: [
+      'articles',
+      'change_screen',
+      'current_paging',
+      'number_of_list',
+      'update_paging',
+      'save_articles'
+    ],
     computed: {
       numberOfListLabel() {
         return `Number of Items: ${this.number_of_list}`;
@@ -109,6 +116,7 @@ Vue.component(
         if (result === true) {
           const index = this.articles.findIndex(article => article.id === id);
           this.articles.splice(index, 1);
+          this.save_articles();
         }
       }
     }

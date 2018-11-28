@@ -2,7 +2,7 @@ Vue.component(
   'article-edit-component',
   {
     template: '#articleEdit',
-    props: ['articles', 'change_screen', 'article'],
+    props: ['articles', 'change_screen', 'article', 'save_articles'],
     methods: {
       switchToList: function() {
         this.change_screen('article-list-component');
@@ -23,11 +23,12 @@ Vue.component(
         const article = this.articles.find(article => article.id === this.article.id);
 
         if (article) {
-          article.title = encodeURI(title);
-          article.content = encodeURI(content);
-          article.author = encodeURI(author);
-          article.email = encodeURI(email);
+          article.title = title;
+          article.content = content;
+          article.author = author;
+          article.email = email;
           article.updatedDate = util.formatDate(new Date());
+          this.save_articles();
           this.switchToList();
         }
       }

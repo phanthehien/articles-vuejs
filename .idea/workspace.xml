@@ -2,8 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c6779536-a019-475d-9974-1fd1ba6cc8b9" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/component/create.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/component/create.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/component/edit.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/component/edit.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/component/list.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/component/list.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
     </list>
@@ -17,23 +18,14 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.38680035">
+    <splitter split-orientation="horizontal" split-proportion="0.45864663">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/core/util.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="270">
-                  <caret line="18" column="28" selection-start-line="18" selection-start-column="28" selection-end-line="18" selection-end-column="28" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/index.html">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="553">
-                  <caret line="83" column="60" lean-forward="true" selection-start-line="83" selection-start-column="60" selection-end-line="83" selection-end-column="60" />
+                <state relative-caret-position="240">
+                  <caret line="16" column="33" lean-forward="true" selection-start-line="16" selection-start-column="33" selection-end-line="16" selection-end-column="33" />
                 </state>
               </provider>
             </entry>
@@ -41,17 +33,17 @@
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/index.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="210">
-                  <caret line="14" column="42" lean-forward="true" selection-start-line="14" selection-start-column="42" selection-end-line="14" selection-end-column="42" />
+                <state relative-caret-position="300">
+                  <caret line="20" column="39" lean-forward="true" selection-start-line="20" selection-start-column="39" selection-end-line="20" selection-end-column="39" />
                 </state>
               </provider>
             </entry>
           </file>
-          <file pinned="false" current-in-tab="false">
+          <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/component/create.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="164">
-                  <caret line="11" column="41" lean-forward="true" selection-start-line="11" selection-start-column="41" selection-end-line="11" selection-end-column="41" />
+                <state relative-caret-position="467">
+                  <caret line="35" column="39" selection-start-line="35" selection-start-column="39" selection-end-line="35" selection-end-column="39" />
                 </state>
               </provider>
             </entry>
@@ -59,8 +51,8 @@
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/component/edit.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="150">
-                  <caret line="10" column="15" lean-forward="true" selection-start-line="10" selection-start-column="15" selection-end-line="10" selection-end-column="15" />
+                <state relative-caret-position="60">
+                  <caret line="4" column="66" selection-start-line="4" selection-start-column="66" selection-end-line="4" selection-end-column="66" />
                 </state>
               </provider>
             </entry>
@@ -81,8 +73,8 @@
           <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/component/list.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="181">
-                  <caret line="87" column="29" selection-start-line="87" selection-start-column="29" selection-end-line="87" selection-end-column="29" />
+                <state relative-caret-position="-1019">
+                  <caret line="15" column="20" selection-start-line="15" selection-start-column="7" selection-end-line="15" selection-end-column="20" />
                 </state>
               </provider>
             </entry>
@@ -90,8 +82,8 @@
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/index.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="225">
-                  <caret line="15" column="26" selection-start-line="15" selection-start-column="14" selection-end-line="15" selection-end-column="26" />
+                <state relative-caret-position="300">
+                  <caret line="20" column="30" lean-forward="true" selection-start-line="20" selection-start-column="30" selection-end-line="20" selection-end-column="30" />
                 </state>
               </provider>
             </entry>
@@ -130,6 +122,10 @@
       <find>numberOfListLabel</find>
       <find>conso</find>
       <find>update_paging</find>
+      <find>number_of_list</find>
+      <find>encode</find>
+      <find>'saveArticles'</find>
+      <find>this.saveArticles()</find>
     </findStrings>
     <replaceStrings>
       <replace>id: util.guid(),</replace>
@@ -139,6 +135,8 @@
       <replace>alert('Please input all value');</replace>
       <replace>name=</replace>
       <replace>number_of_list</replace>
+      <replace>'save_articles'</replace>
+      <replace>this.save_articles()</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -153,19 +151,19 @@
         <option value="$PROJECT_DIR$/src/core/seed.js" />
         <option value="$PROJECT_DIR$/src/list.js" />
         <option value="$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external/lib.dom.d.ts" />
-        <option value="$PROJECT_DIR$/src/component/create.js" />
         <option value="$PROJECT_DIR$/src/component/view.js" />
-        <option value="$PROJECT_DIR$/src/component/edit.js" />
-        <option value="$PROJECT_DIR$/src/index.js" />
         <option value="$PROJECT_DIR$/index.html" />
         <option value="$PROJECT_DIR$/src/component/list.js" />
+        <option value="$PROJECT_DIR$/src/index.js" />
+        <option value="$PROJECT_DIR$/src/component/edit.js" />
+        <option value="$PROJECT_DIR$/src/component/create.js" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="38" />
-    <option name="y" value="23" />
-    <option name="width" value="1467" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="26" />
+    <option name="y" value="29" />
+    <option name="width" value="1403" />
     <option name="height" value="877" />
   </component>
   <component name="ProjectView">
@@ -277,7 +275,7 @@
       <workItem from="1543373390767" duration="193000" />
       <workItem from="1543373604529" duration="30000" />
       <workItem from="1543373653704" duration="6192000" />
-      <workItem from="1543383772316" duration="1128000" />
+      <workItem from="1543383772316" duration="1804000" />
     </task>
     <task id="LOCAL-00001" summary="add commit">
       <created>1543300757796</created>
@@ -290,10 +288,10 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="13812000" />
+    <option name="totallyTimeSpent" value="14488000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="37" y="23" width="1403" height="877" extended-state="6" />
+    <frame x="26" y="29" width="1403" height="877" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.13386397" />
@@ -372,6 +370,20 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/core/util.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="16" column="33" lean-forward="true" selection-start-line="16" selection-start-column="33" selection-end-line="16" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="525">
+          <caret line="172" column="23" selection-start-line="172" selection-start-column="10" selection-end-line="172" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/component/view.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="15">
@@ -379,45 +391,31 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/core/util.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="18" column="28" selection-start-line="18" selection-start-column="28" selection-end-line="18" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/component/create.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="164">
-          <caret line="11" column="41" lean-forward="true" selection-start-line="11" selection-start-column="41" selection-end-line="11" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/component/edit.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="10" column="15" lean-forward="true" selection-start-line="10" selection-start-column="15" selection-end-line="10" selection-end-column="15" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="553">
-          <caret line="83" column="60" lean-forward="true" selection-start-line="83" selection-start-column="60" selection-end-line="83" selection-end-column="60" />
+        <state relative-caret-position="60">
+          <caret line="4" column="66" selection-start-line="4" selection-start-column="66" selection-end-line="4" selection-end-column="66" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="15" column="26" selection-start-line="15" selection-start-column="14" selection-end-line="15" selection-end-column="26" />
+        <state relative-caret-position="300">
+          <caret line="20" column="39" lean-forward="true" selection-start-line="20" selection-start-column="39" selection-end-line="20" selection-end-column="39" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/component/list.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="181">
-          <caret line="87" column="29" selection-start-line="87" selection-start-column="29" selection-end-line="87" selection-end-column="29" />
+        <state relative-caret-position="-1019">
+          <caret line="15" column="20" selection-start-line="15" selection-start-column="7" selection-end-line="15" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/component/create.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="467">
+          <caret line="35" column="39" selection-start-line="35" selection-start-column="39" selection-end-line="35" selection-end-column="39" />
         </state>
       </provider>
     </entry>
