@@ -1,190 +1,187 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <script src="node_modules/vue/dist/vue.js"></script>
-    <!-- incase there is no module
-        <script src="https://unpkg.com/vue"></script>
-    -->
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <title>Articles</title>
-    <link rel="stylesheet" href="css/style.css">
-    <script src="src/core/util.js"></script>
-    <script src="src/core/seed.js"></script>
-    <script src="src/component/create.js"></script>
-    <script src="src/component/view.js"></script>
-    <script src="src/component/edit.js"></script>
-    <script src="src/component/list.js"></script>
+  <meta charset="UTF-8">
+  <script src="node_modules/vue/dist/vue.js"></script>
+  <!-- incase there is no module
+      <script src="https://unpkg.com/vue"></script>
+  -->
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Articles</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="src/core/util.js"></script>
+  <script src="src/core/seed.js"></script>
+  <script src="src/component/create.js"></script>
+  <script src="src/component/view.js"></script>
+  <script src="src/component/edit.js"></script>
+  <script src="src/component/list.js"></script>
 </head>
 <body>
 
 <template id="articleCreate">
-    <div>
-        <div class="panelNew">
-            <input class="new-article-btn" type="button" value="Back to List" @click="switchToList"/>
-        </div>
-        <div class="tableArticle">
-            <form>
-                <label>Title</label>
-                <input class="title" name="title" type="text" v-model="article.title">
-
-                <label>Content</label>
-                <textarea class="content" v-model="article.content" name="content">{{article.content}}</textarea>
-
-                <label>Author</label>
-                <input class="author" name="author" type="text" v-model="article.author">
-
-                <label>Email</label>
-                <input class="email" name="email" type="text" v-model="article.email">
-
-                <input class="submit-article-btn" type="button" value="Create" @click="createArticle">
-            </form>
-        </div>
+  <div>
+    <div class="panelNew">
+      <input class="new-article-btn" type="button" value="Back to List" @click="switchToList"/>
     </div>
+    <div class="tableArticle">
+      <form>
+        <label>Title</label>
+        <input class="title" name="title" type="text" v-model="article.title">
+
+        <label>Content</label>
+        <textarea class="content" v-model="article.content" name="content">{{article.content}}</textarea>
+
+        <label>Author</label>
+        <input class="author" name="author" type="text" v-model="article.author">
+
+        <label>Email</label>
+        <input class="email" name="email" type="text" v-model="article.email">
+
+        <input class="submit-article-btn" type="button" value="Create" @click="createArticle">
+      </form>
+    </div>
+  </div>
 </template>
 
 <template id="articleList">
-    <div>
-        <div class="panelNew">
-            <input class="new-article-btn" type="button" value="Create Article" @click="switchToCreate"/>
-        </div>
-        <table class="article-list" @click="handleActions">
-            <thead>
-            <th>Title</th>
-            <th>Content</th>
-            <th>Author</th>
-            <th>Email</th>
-            <th>Updated</th>
-            <th>View</th>
-            <th>Actions</th>
-            </thead>
-            <tbody class="article-body">
-            <tr v-for="article in currentArticles"
-                :key="article.id"
-                :data-id="article.id"
-                data-action="actionViewRow"
-                @click.capture="handleActions"
-            >
-                <td data-label="Title">{{article.title}}</td>
-                <td data-label="Content">{{article.shortContent}}</td>
-                <td data-label="Author">{{article.author}}</td>
-                <td data-label="Email">{{article.email}}</td>
-                <td data-label="Updated">{{article.updatedDate}}</td>
-                <td data-label="View">{{article.viewCount}}</td>
-                <td data-label="Actions">
-                    <span :data-id="article.id" data-action="actionView" class="action"> View </span>
-                    <span :data-id="article.id" data-action="actionEdit" class="action"> Edit </span>
-                    <span :data-id="article.id" data-action="actionDelete" class="action">
+  <div>
+    <div class="panelNew">
+      <input class="new-article-btn" type="button" value="Create Article" @click="switchToCreate"/>
+    </div>
+    <table class="article-list" @click="handleActions">
+      <thead>
+      <th>Title</th>
+      <th>Content</th>
+      <th>Author</th>
+      <th>Email</th>
+      <th>Updated</th>
+      <th>View</th>
+      <th>Actions</th>
+      </thead>
+      <tbody class="article-body">
+      <tr v-for="article in currentArticles"
+          :key="article.id"
+          :data-id="article.id"
+          data-action="actionViewRow"
+          @click.capture="handleActions"
+      >
+        <td data-label="Title">{{article.title}}</td>
+        <td data-label="Content">{{article.shortContent}}</td>
+        <td data-label="Author">{{article.author}}</td>
+        <td data-label="Email">{{article.email}}</td>
+        <td data-label="Updated">{{article.updatedDate}}</td>
+        <td data-label="View">{{article.viewCount}}</td>
+        <td data-label="Actions">
+          <span :data-id="article.id" data-action="actionView" class="action"> View </span>
+          <span :data-id="article.id" data-action="actionEdit" class="action"> Edit </span>
+          <span :data-id="article.id" data-action="actionDelete" class="action">
               Delete
             </span>
-                </td>
-            </tr>
-            </tbody>
-        </table>
+        </td>
+      </tr>
+      </tbody>
+    </table>
 
-        <div class="pagination" @click="handlePaginationClick">
-            <div class="article-number-select">
-                <button class="pagination-label-btn">{{numberOfListLabel}}</button>
-                <div class="dropdown-content">
-                    <p
-                            v-for="pagingValue in pagingValues"
-                            :key="pagingValue"
-                            :data-index="pagingValue"
-                            data-action="actionDropdown">
-                        {{pagingValue}}
-                    </p>
-                </div>
-            </div>
-            <div class="article-pagination">
-                <a
-                        v-for="paginationItem in paginationItems"
-                        :key="paginationItem"
-                        :data-index="paginationItem"
-                        data-action="actionPagination">
-                    {{paginationItem}}
-                </a>
-            </div>
+    <div class="pagination" @click="handlePaginationClick">
+      <div class="article-number-select">
+        <button class="pagination-label-btn">{{numberOfListLabel}}</button>
+        <div class="dropdown-content">
+          <p
+              v-for="pagingValue in pagingValues"
+              :key="pagingValue"
+              :data-index="pagingValue"
+              data-action="actionDropdown">
+            {{pagingValue}}
+          </p>
         </div>
+      </div>
+      <div class="article-pagination">
+        <a
+            v-for="paginationItem in paginationItems"
+            :key="paginationItem"
+            :data-index="paginationItem"
+            data-action="actionPagination">
+          {{paginationItem}}
+        </a>
+      </div>
     </div>
+  </div>
 </template>
 
 <template id="articleView">
-    <div>
-        <div class="panelNew">
-            <input class="new-article-btn" type="button" value="Back to List" @click="switchToList"/>
-        </div>
-        <div class="panelArticle">
-            <div class="panelItem">
-                <label for="title-label">Title: </label>
-                <span id="title-label" v-model="article.title" name="title-label" type="text">{{article.title}}</span>
-            </div>
-
-            <div class="panelItem">
-
-                <label for="content-label">Content: </label>
-                <span id="content-label" v-model="article.content" name="content-label"
-                      type="text">{{article.content}}</span>
-            </div>
-            <div class="panelItem">
-
-                <label for="author-label">Author: </label>
-                <span id="author-label" v-model="article.author" name="author-label"
-                      type="text">{{article.author}}</span>
-            </div>
-            <div class="panelItem">
-
-                <label for="email-label">Email: </label>
-                <span id="email-label" v-model="article.email" name="email-label" type="text">{{article.email}}</span>
-            </div>
-            <div class="panelItem">
-
-                <label for="updated-date-label">Updated Date: </label>
-                <span id="updated-date-label" v-model="article.updatedDate" name="updated-date-label" type="text">{{article.updatedDate}}</span>
-            </div>
-            <div class="panelItem">
-
-
-                <label for="view-count-label">View Count: </label>
-                <span id="view-count-label" v-model="article.viewCount" name="view-count-label" type="text">{{article.viewCount}}</span>
-            </div>
-
-        </div>
+  <div>
+    <div class="panelNew">
+      <input class="new-article-btn" type="button" value="Back to List" @click="switchToList"/>
     </div>
+    <div class="panelArticle">
+      <div class="panelItem">
+        <label for="title-label">Title: </label>
+        <span id="title-label" name="title-label" type="text">{{article.title}}</span>
+      </div>
+
+      <div class="panelItem">
+
+        <label for="content-label">Content: </label>
+        <span id="content-label" name="content-label"
+              type="text">{{article.content}}</span>
+      </div>
+      <div class="panelItem">
+        <label for="author-label">Author: </label>
+        <span id="author-label" name="author-label" type="text">{{article.author}}</span>
+      </div>
+      <div class="panelItem">
+        <label for="email-label">Email: </label>
+        <span id="email-label" name="email-label" type="text">{{article.email}}</span>
+      </div>
+      <div class="panelItem">
+
+        <label for="updated-date-label">Updated Date: </label>
+        <span id="updated-date-label" name="updated-date-label" type="text">{{article.updatedDate}}</span>
+      </div>
+      <div class="panelItem">
+
+
+        <label for="view-count-label">View Count: </label>
+        <span id="view-count-label" name="view-count-label" type="text">{{article.viewCount}}</span>
+      </div>
+
+    </div>
+  </div>
 </template>
 
 <template id="articleEdit">
-    <div>
-        <div class="panelNew">
-            <input class="new-article-btn" type="button" value="Back to List" @click="switchToList"/>
-        </div>
-        <div class="tableArticle">
-            <label>Title</label>
-            <input class="title title_element" name="title" type="text" v-model="article.title">
-
-            <label>Content</label>
-            <textarea class="content" v-model="article.content">{{article.content}}</textarea>
-
-            <label>Author</label>
-            <input class="author" name="author" type="text" v-model="article.author">
-
-            <label>Email</label>
-            <input class="email" name="email" type="text" v-model="article.email">
-
-            <input class="submit-article-btn" type="button" value="Save Changes" @click="saveArticle">
-        </div>
+  <div>
+    <div class="panelNew">
+      <input class="new-article-btn" type="button" value="Back to List" @click="switchToList"/>
     </div>
+    <div class="tableArticle">
+      <label>Title</label>
+      <input class="title title_element" name="title" type="text" v-model="article.title">
+
+      <label>Content</label>
+      <textarea class="content" v-model="article.content">{{article.content}}</textarea>
+
+      <label>Author</label>
+      <input class="author" name="author" type="text" v-model="article.author">
+
+      <label>Email</label>
+      <input class="email" name="email" type="text" v-model="article.email">
+
+      <input class="submit-article-btn" type="button" value="Save Changes" @click="saveArticle">
+    </div>
+  </div>
 </template>
 
 <div id="app">
-    <div :is="currentComponent"
-         :articles="articles"
-         :article="article"
-         :number_of_list="numberOfList"
-         :current_paging="currentPaging"
-         :update_Paging="updatePaging"
-         :save_articles="saveArticles"
-         :change_screen="changeScreen">
-    </div>
+  <div :is="currentComponent"
+       :articles="articles"
+       :article="article"
+       :number_of_list="numberOfList"
+       :current_paging="currentPaging"
+       :update_Paging="updatePaging"
+       :save_articles="saveArticles"
+       :change_screen="changeScreen">
+  </div>
 </div>
 
 <script src="src/index.js"></script>

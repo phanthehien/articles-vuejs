@@ -2,7 +2,11 @@ Vue.component(
   'article-view-component',
   {
     template: '#articleView',
-    props: ['articles', 'change_screen', 'article'],
+    props: ['articles', 'change_screen', 'article', 'save_articles'],
+    created: function() {
+      this.article.viewCount += 1;
+      this.save_articles();
+    },
     methods: {
       switchToList: function () {
         this.change_screen('article-list-component');
