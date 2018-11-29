@@ -2,9 +2,9 @@ new Vue({
   el: '#app',
   data: {
     articles: db.articles,
-    currentComponent: 'article-list-component',
+    currentComponent: null,
     article: null,
-    numberOfList: 2,
+    numberOfList: 0,
     currentPaging: 0,
   },
   created: function() {
@@ -12,17 +12,48 @@ new Vue({
     this.articles = articleDB ? JSON.parse(articleDB) : db.articles;
 
     const articlePaging = window.localStorage.getItem('articlePaging');
-    const pagingInfo = articlePaging ? JSON.parse(articlePaging) : { numberOfList: 2, currentPaging: 0};
+    const pagingInfo = articlePaging ? JSON.parse(articlePaging) : { numberOfList: 3, currentPaging: 0};
 
-    const { numberOfList, currentPaging } = pagingInfo;
+    const screenState = {
+      component: 'article-list-component',
+      pagingInfo
+    };
+    this.initScreen(screenState);
 
-    this.numberOfList = numberOfList;
-    this.currentPaging = currentPaging;
+    window.addEventListener('popstate', this.handleBackEvent);
   },
   methods: {
-    changeScreen: function(screenComponent, article)  {
-      this.currentComponent = screenComponent;
-      this.article = article;
+    initScreen: function(screenState) {
+      window.history.replaceState(screenState, '');
+      this.swapScreen(screenState);
+    },
+    handleBackEvent: function(e) {
+      if (e.state) {
+        this.swapScreen(e.state);
+      }
+    },
+    changeScreen: function(screenComponent, article, pagingInfo)  {
+      const screenState = {
+        component: screenComponent,
+        article,
+        pagingInfo
+      };
+      window.history.pushState(screenState, '');
+
+      this.swapScreen(screenState);
+
+    },
+    swapScreen: function (screenState) {
+        const { component, article, pagingInfo } = screenState;
+
+        this.currentComponent = component;
+        this.article = article;
+
+        if (pagingInfo) {
+            const { numberOfList, currentPaging } = pagingInfo;
+            this.numberOfList = numberOfList;
+            this.currentPaging = currentPaging;
+        }
     },
     updatePaging: function(updatePaging) {
       const { numberOfList, currentPaging } = updatePaging;
