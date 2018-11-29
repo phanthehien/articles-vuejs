@@ -13,10 +13,10 @@ new Vue({
     const appState = this._getInitState();
     this._initScreen(appState);
 
-    window.addEventListener('popstate', this._handleBackEvent);
+    window.addEventListener('hashchange', this._handleHashChange);
   },
   beforeDestroy: function () {
-    window.removeEventListener('popstate', this._handleBackEvent);
+    window.removeEventListener('hashchange', this._handleHashChange);
   },
   methods: {
     changeScreen: function (screenComponent, article, pagingInfo) {
@@ -26,7 +26,6 @@ new Vue({
         pagingInfo: pagingInfo || this.pagingInfo
       };
 
-      window.history.pushState(screenState, '');
       this._replaceScreen(screenState);
     },
     updatePaging: function (updatePaging) {
@@ -47,36 +46,45 @@ new Vue({
       window.localStorage.setItem('articleDB', JSON.stringify(this.articles));
     },
     _initScreen: function (screenState) {
-      window.history.replaceState(screenState, '');
       this._replaceScreen(screenState);
     },
-    _getInitState: function () {
+    _getStateFromHash: function () {
       const urlHash = util.getHash(window.location.hash);
+
       if (urlHash && JSON.parse(urlHash)) {
         return JSON.parse(urlHash);
       }
 
-      const initState = {
+      return null;
+    },
+    _getInitState: function () {
+      const state = this._getStateFromHash();
+
+      if (state) {
+        return state;
+      }
+
+      const initialState = {
         component: 'article-list-component',
         pagingInfo: {numberOfList: 3, currentPaging: 0}
       };
-      return initState;
+
+      return initialState;
     },
     _replaceScreen: function (screenState) {
       const hashState = util.encode(JSON.stringify(screenState));
-      window.location.hash = hashState;
+      const { component, article, pagingInfo } = screenState;
 
-      const {component, article, pagingInfo} = screenState;
+      window.location.hash = hashState;
       this.currentComponent = component;
       this.article = article;
       this.pagingInfo = pagingInfo;
     },
-    _handleBackEvent: function (e) {
-      if (e.state) {
-        this._replaceScreen(e.state);
-      }
-    },
     _handleHashChange: function (e) {
+      if (window.location.hash) {
+        const state = this._getStateFromHash();
+        this._replaceScreen(state);
+      }
     }
   }
 });
