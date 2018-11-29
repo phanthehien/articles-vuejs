@@ -165,6 +165,10 @@ div.panelArticle {
     background-color: white;
 }
 
+.article-pagination a.selected {
+    background-color: chartreuse;
+}
+
 .article-pagination a:hover {
     color: black;
     background-color: antiquewhite;
