@@ -15,14 +15,20 @@ Vue.component(
       'save_articles'
     ],
     computed: {
+      numberOfList() {
+        return this.paging_info ? Number(this.paging_info.numberOfList) : 3;
+      },
+      currentPaging() {
+        return this.paging_info ? Number(this.paging_info.currentPaging) : 0;
+      },
       numberOfListLabel() {
-        return `Number of Items: ${this.paging_info.numberOfList}`;
+        return `Number of Items: ${this.numberOfList}`;
       },
       paginationItems() {
         const paginationItems = [];
 
-        if (this.articles && this.paging_info.numberOfList) {
-          const numberOfPaging = Math.ceil(this.articles.length / this.paging_info.numberOfList);
+        if (this.articles && this.numberOfList) {
+          const numberOfPaging = Math.ceil(this.articles.length / this.numberOfList);
 
           for (let i = 0; i < numberOfPaging; i += 1) {
             paginationItems.push(i + 1);
@@ -32,8 +38,8 @@ Vue.component(
         return paginationItems;
       },
       currentArticles() {
-        const skip = this.paging_info.currentPaging * this.paging_info.numberOfList;
-        const endIndex = Math.min(skip + this.paging_info.numberOfList, this.articles.length);
+        const skip = this.currentPaging * this.numberOfList;
+        const endIndex = Math.min(skip + this.numberOfList, this.articles.length);
 
         const articleData = this.articles.slice(skip, endIndex).map((article) => {
           const newArticle = article;
@@ -107,7 +113,7 @@ Vue.component(
 
             case 'actionPagination':
               this.update_paging({
-                numberOfList: this.paging_info.numberOfList,
+                numberOfList: this.numberOfList,
                 currentPaging: parseInt(index - 1)
               });
 

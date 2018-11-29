@@ -52,8 +52,8 @@ new Vue({
     _getStateFromHash: function () {
       const urlHash = util.getHash(window.location.hash);
 
-      if (urlHash && JSON.parse(urlHash)) {
-        return JSON.parse(urlHash);
+      if (urlHash) {
+        return this._urlStringToScreenState(urlHash)
       }
 
       return null;
@@ -73,7 +73,7 @@ new Vue({
       return initialState;
     },
     _replaceScreen: function (screenState) {
-      const hashState = util.encode(JSON.stringify(screenState));
+      const hashState = this._screenStateToUrlString(screenState);
       const { component, articleId, pagingInfo } = screenState;
 
       let article = null;
@@ -92,6 +92,48 @@ new Vue({
         const state = this._getStateFromHash();
         this._replaceScreen(state);
       }
+    },
+    _screenStateToUrlString: function(screenState) {
+      const { component, articleId, pagingInfo } = screenState;
+
+      let url = `component=${component}`;
+
+      if (articleId) {
+        url += `&articleId=${articleId}`
+      }
+
+      if (pagingInfo) {
+        const { numberOfList, currentPaging } = pagingInfo;
+        url += `&pagingInfo.numberOfList=${numberOfList}&pagingInfo.currentPaging=${currentPaging}`
+      }
+
+      return url;
+    },
+    _urlStringToScreenState: function(url) {
+
+      if (url) {
+        let screenState = {};
+        const fieldAndValues = url.split('&');
+
+        fieldAndValues.map(fieldAndValue => {
+          const words = fieldAndValue.split('=');
+          const field = words[0];
+          const value = words.length > 1 ? words[1] : null;
+
+          util.setByDot(screenState, field, value);
+        });
+
+        if (!screenState.pagingInfo) {
+          screenState.pagingInfo = {
+            numberOfList: 3,
+            currentPaging: 0
+          }
+        }
+
+        return screenState;
+      }
+
+      return null;
     }
   }
 });
