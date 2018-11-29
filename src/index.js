@@ -57,10 +57,16 @@ new Vue({
     },
     updatePaging: function(updatePaging) {
       const { numberOfList, currentPaging } = updatePaging;
-      this.numberOfList = numberOfList;
-      this.currentPaging = currentPaging;
 
-      window.localStorage.setItem('articlePaging', JSON.stringify(updatePaging));
+      if (numberOfList !== this.numberOfList || currentPaging !== this.currentPaging) {
+        const pagingInfo = {
+          numberOfList,
+          currentPaging,
+        };
+
+        this.changeScreen(this.currentComponent, this.article, pagingInfo);
+        window.localStorage.setItem('articlePaging', JSON.stringify(updatePaging));
+      }
     },
     saveArticles: function() {
       window.localStorage.setItem('articleDB', JSON.stringify(this.articles));
