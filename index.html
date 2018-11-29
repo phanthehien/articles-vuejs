@@ -89,6 +89,7 @@
         <button class="pagination-label-btn">{{numberOfListLabel}}</button>
         <div class="dropdown-content">
           <p
+              :class="{ selected: pagingValue === number_of_list }"
               v-for="pagingValue in pagingValues"
               :key="pagingValue"
               :data-index="pagingValue"
