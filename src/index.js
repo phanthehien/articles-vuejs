@@ -4,8 +4,7 @@ new Vue({
     articles: db.articles,
     currentComponent: null,
     article: null,
-    numberOfList: 0,
-    currentPaging: 0,
+    pagingInfo: { }
   },
   created: function() {
     const articleDB = window.localStorage.getItem('articleDB');
@@ -33,11 +32,8 @@ new Vue({
     changeScreen: function(screenComponent, article, pagingInfo)  {
       const screenState = {
         component: screenComponent,
-        article: article || this.article ,
-        pagingInfo: pagingInfo || {
-          numberOfList: this.numberOfList,
-          currentPaging: this.currentPaging
-        }
+        article: article || this.article,
+        pagingInfo: pagingInfo || this.pagingInfo
       };
 
       window.history.pushState(screenState, '');
@@ -51,12 +47,7 @@ new Vue({
       const { component, article, pagingInfo } = screenState;
       this.currentComponent = component;
       this.article = article;
-
-      if (pagingInfo) {
-        const { numberOfList, currentPaging } = pagingInfo;
-        this.numberOfList = numberOfList;
-        this.currentPaging = currentPaging;
-      }
+      this.pagingInfo = pagingInfo;
     },
     handleBackEvent: function(e) {
       if (e.state) {
@@ -68,10 +59,12 @@ new Vue({
     updatePaging: function(updatePaging) {
       const { numberOfList, currentPaging } = updatePaging;
 
-      if (numberOfList !== this.numberOfList || currentPaging !== this.currentPaging) {
+      if (numberOfList !== this.pagingInfo.numberOfList ||
+        currentPaging !== this.pagingInfo.currentPaging
+      ) {
         const pagingInfo = {
           numberOfList,
-          currentPaging,
+          currentPaging
         };
 
         this.changeScreen(this.currentComponent, this.article, pagingInfo);

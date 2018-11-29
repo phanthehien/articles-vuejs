@@ -69,7 +69,7 @@
             data-action="actionViewRow"
             @click="handleActions"
         >
-          <td data-label="#">{{index + 1 + current_paging * number_of_list }}</td>
+          <td data-label="#">{{index + 1 + paging_info.currentPaging * paging_info.numberOfList }}</td>
           <td data-label="Title">{{article.title}}</td>
           <td data-label="Content">{{article.shortContent}}</td>
           <td data-label="Author">{{article.author}}</td>
@@ -91,7 +91,7 @@
         <button class="pagination-label-btn">{{numberOfListLabel}}</button>
         <div class="dropdown-content">
           <p
-              :class="{ selected: pagingValue === number_of_list }"
+              :class="{ selected: pagingValue === paging_info.numberOfList }"
               v-for="pagingValue in pagingValues"
               :key="pagingValue"
               :data-index="pagingValue"
@@ -102,7 +102,7 @@
       </div>
       <div class="article-pagination">
         <a
-            :class="{ selected: paginationItem === (current_paging + 1) }"
+            :class="{ selected: paginationItem === (paging_info.currentPaging + 1) }"
             v-for="paginationItem in paginationItems"
             :key="paginationItem"
             :data-index="paginationItem"
@@ -181,8 +181,7 @@
   <div :is="currentComponent"
        :articles="articles"
        :article="article"
-       :number_of_list="numberOfList"
-       :current_paging="currentPaging"
+       :paging_info="pagingInfo"
        :update_Paging="updatePaging"
        :save_articles="saveArticles"
        :change_screen="changeScreen">
