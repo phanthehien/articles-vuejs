@@ -22,16 +22,17 @@ new Vue({
     changeScreen: function (screenComponent, article, pagingInfo) {
       const screenState = {
         component: screenComponent,
-        article: article || this.article,
+        articleId: article && article.id,
         pagingInfo: pagingInfo || this.pagingInfo
       };
 
       this._replaceScreen(screenState);
     },
     updatePaging: function (updatePaging) {
-      const {numberOfList, currentPaging} = updatePaging;
+      const { numberOfList, currentPaging } = updatePaging;
 
-      if (numberOfList !== this.pagingInfo.numberOfList ||
+      if (
+        numberOfList !== this.pagingInfo.numberOfList ||
         currentPaging !== this.pagingInfo.currentPaging
       ) {
         const pagingInfo = {
@@ -73,7 +74,13 @@ new Vue({
     },
     _replaceScreen: function (screenState) {
       const hashState = util.encode(JSON.stringify(screenState));
-      const { component, article, pagingInfo } = screenState;
+      const { component, articleId, pagingInfo } = screenState;
+
+      let article = null;
+
+      if (articleId) {
+        article = this.articles.find(article => article.id === articleId);
+      }
 
       window.location.hash = hashState;
       this.currentComponent = component;

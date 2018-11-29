@@ -28,11 +28,11 @@ const util = {
     },
 
     encode: function(content) {
-      return btoa(encodeURI(content));
+      return encodeURI(content);
     },
 
     decode: function(content) {
-      return decodeURI(atob(content));
+      return decodeURI(content);
     },
 
     getHash: function(hashUrl) {
