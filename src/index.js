@@ -60,14 +60,11 @@ new Vue({
         component: 'article-list-component',
         pagingInfo: {numberOfList: 3, currentPaging: 0}
       };
-      const hashState = window.localStorage.getItem('hashState');
-      const appState = hashState ? JSON.parse(util.decode(hashState)) : initState;
-      return appState;
+      return initState;
     },
     _replaceScreen: function (screenState) {
       const hashState = util.encode(JSON.stringify(screenState));
       window.location.hash = hashState;
-      window.localStorage.setItem('hashState', hashState);
 
       const {component, article, pagingInfo} = screenState;
       this.currentComponent = component;
