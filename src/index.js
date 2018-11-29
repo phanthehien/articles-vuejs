@@ -34,7 +34,10 @@ new Vue({
       const screenState = {
         component: screenComponent,
         article: article || this.article ,
-        pagingInfo: pagingInfo || this.pagingInfo
+        pagingInfo: pagingInfo || {
+          numberOfList: this.numberOfList,
+          currentPaging: this.currentPaging
+        }
       };
 
       window.history.pushState(screenState, '');
