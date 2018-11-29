@@ -34,4 +34,18 @@ const util = {
     decode: function(content) {
       return decodeURI(atob(content));
     },
+
+    getHash: function(hashUrl) {
+      let hash = null;
+
+      if (hashUrl && hashUrl.length > 1 && hashUrl[0]) {
+        const hashState = this.decode(hashUrl.substr(1));
+
+        if (hashState) {
+          hash = hashState;
+        }
+      }
+
+      return hash;
+    }
 };

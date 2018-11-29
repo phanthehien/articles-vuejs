@@ -4,32 +4,22 @@ new Vue({
     articles: db.articles,
     currentComponent: null,
     article: null,
-    pagingInfo: { }
+    pagingInfo: {}
   },
-  created: function() {
+  created: function () {
     const articleDB = window.localStorage.getItem('articleDB');
     this.articles = articleDB ? JSON.parse(articleDB) : db.articles;
 
-    const initState = {
-      component: 'article-list-component',
-      pagingInfo: { numberOfList: 3, currentPaging: 0}
-    };
-    const hashState = window.localStorage.getItem('hashState');
-    const appState = hashState ? JSON.parse(util.decode(hashState)) : initState;
+    const appState = this._getInitState();
+    this._initScreen(appState);
 
-    this.initScreen(appState);
-
-    window.addEventListener('popstate', this.handleBackEvent);
+    window.addEventListener('popstate', this._handleBackEvent);
   },
-  beforeDestroy: function() {
-    window.removeEventListener('popstate', this.handleBackEvent);
+  beforeDestroy: function () {
+    window.removeEventListener('popstate', this._handleBackEvent);
   },
   methods: {
-    initScreen: function(screenState) {
-      window.history.replaceState(screenState, '');
-      this.swapScreen(screenState);
-    },
-    changeScreen: function(screenComponent, article, pagingInfo)  {
+    changeScreen: function (screenComponent, article, pagingInfo) {
       const screenState = {
         component: screenComponent,
         article: article || this.article,
@@ -37,27 +27,10 @@ new Vue({
       };
 
       window.history.pushState(screenState, '');
-      this.swapScreen(screenState);
+      this._replaceScreen(screenState);
     },
-    swapScreen: function (screenState) {
-      const hashState = util.encode(JSON.stringify(screenState));
-      window.location.hash = hashState;
-      window.localStorage.setItem('hashState', hashState);
-
-      const { component, article, pagingInfo } = screenState;
-      this.currentComponent = component;
-      this.article = article;
-      this.pagingInfo = pagingInfo;
-    },
-    handleBackEvent: function(e) {
-      if (e.state) {
-        this.swapScreen(e.state);
-      }
-    },
-    handleHashChange: function(e) {
-    },
-    updatePaging: function(updatePaging) {
-      const { numberOfList, currentPaging } = updatePaging;
+    updatePaging: function (updatePaging) {
+      const {numberOfList, currentPaging} = updatePaging;
 
       if (numberOfList !== this.pagingInfo.numberOfList ||
         currentPaging !== this.pagingInfo.currentPaging
@@ -70,8 +43,43 @@ new Vue({
         this.changeScreen(this.currentComponent, this.article, pagingInfo);
       }
     },
-    saveArticles: function() {
+    saveArticles: function () {
       window.localStorage.setItem('articleDB', JSON.stringify(this.articles));
     },
+    _initScreen: function (screenState) {
+      window.history.replaceState(screenState, '');
+      this._replaceScreen(screenState);
+    },
+    _getInitState: function () {
+      const urlHash = util.getHash(window.location.hash);
+      if (urlHash && JSON.parse(urlHash)) {
+        return JSON.parse(urlHash);
+      }
+
+      const initState = {
+        component: 'article-list-component',
+        pagingInfo: {numberOfList: 3, currentPaging: 0}
+      };
+      const hashState = window.localStorage.getItem('hashState');
+      const appState = hashState ? JSON.parse(util.decode(hashState)) : initState;
+      return appState;
+    },
+    _replaceScreen: function (screenState) {
+      const hashState = util.encode(JSON.stringify(screenState));
+      window.location.hash = hashState;
+      window.localStorage.setItem('hashState', hashState);
+
+      const {component, article, pagingInfo} = screenState;
+      this.currentComponent = component;
+      this.article = article;
+      this.pagingInfo = pagingInfo;
+    },
+    _handleBackEvent: function (e) {
+      if (e.state) {
+        this._replaceScreen(e.state);
+      }
+    },
+    _handleHashChange: function (e) {
+    }
   }
 });
