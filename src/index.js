@@ -1,3 +1,14 @@
+
+Vue.filter('formatDate', function (date) {
+  return util.toDateString(date);
+});
+
+Vue.filter('shortContent', function (content) {
+  return util.getSubString(content);
+});
+
+
+
 new Vue({
   el: '#app',
   data: {

@@ -17,6 +17,11 @@ const util = {
       return text;
     },
 
+    toDateString: function (timestamp) {
+      const date = new Date(timestamp * 1000);
+      return this.formatDate(date);
+    },
+
     formatDate: function (date) {
       const dd = date.getDate();
       const mm = date.getMonth() + 1;

@@ -56,18 +56,7 @@ Vue.component(
         const skip = this.currentPaging * this.numberOfList;
         const endIndex = Math.min(skip + this.numberOfList, this.articles.length);
 
-        const articleData = this.articles.slice(skip, endIndex).map((article) => {
-          const newArticle = article;
-          newArticle.shortContent = util.getSubString(article.content);
-          newArticle.author = article.author;
-          newArticle.email = article.email;
-          newArticle.title = article.title;
-          newArticle.content = article.content;
-
-          return newArticle;
-        });
-
-        return articleData;
+        return this.articles.slice(skip, endIndex);
       }
     },
     methods: {

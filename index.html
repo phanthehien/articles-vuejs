@@ -71,7 +71,7 @@
           <td data-label="Content">{{article.shortContent}}</td>
           <td data-label="Author">{{article.author}}</td>
           <td data-label="Email">{{article.email}}</td>
-          <td data-label="Updated">{{article.updatedDate}}</td>
+          <td data-label="Updated">{{article.updatedDate | formatDate}}</td>
           <td data-label="View">{{article.viewCount}}</td>
           <td data-label="Actions">
             <span :data-id="article.id" data-action="actionEdit" class="action"> Edit </span>
@@ -140,7 +140,7 @@
       <div class="panelItem">
 
         <label for="updated-date-label">Updated Date: </label>
-        <span id="updated-date-label" name="updated-date-label" type="text">{{article.updatedDate}}</span>
+        <span id="updated-date-label" name="updated-date-label" type="text">{{article.updatedDate | formatDate}}</span>
       </div>
       <div class="panelItem">
         <label for="view-count-label">View Count: </label>
@@ -161,7 +161,7 @@
       <input class="title title_element" name="title" type="text" v-model="article.title">
 
       <label>Content</label>
-      <textarea class="content" v-model="article.content">{{article.content}}</textarea>
+      <textarea class="content" v-model="article.content">{{article.content | shortContent}}</textarea>
 
       <label>Author</label>
       <input class="author" name="author" type="text" v-model="article.author">
