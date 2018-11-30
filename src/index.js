@@ -54,7 +54,7 @@ new Vue({
       }
     },
     saveArticles: function () {
-      window.localStorage.setItem('articleDB', JSON.stringify(this.articles));
+      db.saveArticles(this.articles);
     },
     _initScreen: function() {
       const appState = this._getInitState();

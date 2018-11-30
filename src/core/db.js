@@ -1,12 +1,15 @@
 const db = {
     getArticles: function () {
-      return this.getArticlesDB() || this.getSeedDB().articles;
+      return this._getArticlesDB() || this._getSeedDB().articles;
     },
-    getArticlesDB: function () {
+    saveArticles: function (articles) {
+      window.localStorage.setItem('articleDB', JSON.stringify(articles));
+    },
+    _getArticlesDB: function () {
       const articleDB = localStorage.getItem('articleDB');
       return articleDB && JSON.parse(articleDB);
     },
-    getSeedDB: function () {
+    _getSeedDB: function () {
       return {
         articles: [{
           id: util.guid(),
