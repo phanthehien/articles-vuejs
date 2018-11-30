@@ -4,9 +4,7 @@ Vue.component(
     template: '#articleCreate',
     data() {
       return {
-        article: {
-
-        },
+        article: { },
         errorMessage: ''
       }
     },
