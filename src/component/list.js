@@ -60,19 +60,19 @@ Vue.component(
       }
     },
     methods: {
-      switchToCreate: function() {
+      switchToCreate: function () {
         this.change_screen('article-create-component');
       },
-      switchToView: function(article) {
+      switchToView: function (article) {
         this.change_screen('article-view-component', article);
       },
-      switchToEdit: function(article) {
+      switchToEdit: function (article) {
         this.change_screen('article-edit-component', article);
       },
-      handleActions: function() {
+      handleActions: function () {
         // check for the child component first then
         // if not then check for current component
-        if(!this._handleAction(event.target)) {
+        if (!this._handleAction(event.target)) {
           this._handleAction(event.currentTarget);
         }
       },
@@ -102,7 +102,7 @@ Vue.component(
       },
       deleteArticle(article) {
         const { title, id } = article;
-        const result = confirm('are you sure to delete this article: \n ' +  title + ' ?');
+        const result = confirm('are you sure to delete this article: \n ' + title + ' ?');
 
         if (result === true) {
           const index = this.articles.findIndex(article => article.id === id);
@@ -110,7 +110,7 @@ Vue.component(
           this.save_articles();
         }
       },
-      _handleAction: function(target) {
+      _handleAction: function (target) {
         if (target && target.dataset) {
           const { id, action } = target.dataset;
           const article = this.articles.find(article => article.id === id);

@@ -5,12 +5,12 @@ Vue.component(
     mixins: [article_mixins.article_item],
     data() {
       return {
-        article: { },
+        article: {},
         errorMessage: ''
       }
     },
     methods: {
-      createArticle: function() {
+      createArticle: function () {
         const {
           title,
           content,
@@ -48,5 +48,4 @@ Vue.component(
 
     }
   },
-
 );

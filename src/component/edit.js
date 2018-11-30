@@ -10,7 +10,7 @@ Vue.component(
       }
     },
     methods: {
-      saveArticle: function() {
+      saveArticle: function () {
         const {
           title,
           content,
@@ -42,5 +42,4 @@ Vue.component(
       }
     }
   },
-
 );

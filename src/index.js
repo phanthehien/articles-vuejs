@@ -1,4 +1,3 @@
-
 Vue.filter('formatDate', function (date) {
   return util.toDateString(date);
 });
@@ -6,7 +5,6 @@ Vue.filter('formatDate', function (date) {
 Vue.filter('shortContent', function (content) {
   return util.getSubString(content);
 });
-
 
 
 new Vue({
@@ -56,7 +54,7 @@ new Vue({
     saveArticles: function () {
       db.saveArticles(this.articles);
     },
-    _initScreen: function() {
+    _initScreen: function () {
       const appState = this._getInitState();
       this._replaceScreen(appState);
     },
@@ -78,7 +76,7 @@ new Vue({
 
       const initialState = {
         component: 'article-list-component',
-        pagingInfo: {numberOfList: 3, currentPaging: 0}
+        pagingInfo: { numberOfList: 3, currentPaging: 0 }
       };
 
       return initialState;
@@ -105,7 +103,7 @@ new Vue({
         this._replaceScreen(state);
       }
     },
-    _screenStateToUrlString: function(screenState) {
+    _screenStateToUrlString: function (screenState) {
       // converting screenState to url String
       const { component, articleId, pagingInfo } = screenState;
 
@@ -122,7 +120,7 @@ new Vue({
 
       return url;
     },
-    _urlStringToScreenState: function(url) {
+    _urlStringToScreenState: function (url) {
       // converting urlString to screenState
 
       if (url) {
