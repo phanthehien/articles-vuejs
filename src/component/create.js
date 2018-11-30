@@ -2,17 +2,14 @@ Vue.component(
   'article-create-component',
   {
     template: '#articleCreate',
+    mixins: [article_mixins.article_item],
     data() {
       return {
         article: { },
         errorMessage: ''
       }
     },
-    props: ['articles', 'change_screen', 'save_articles'],
     methods: {
-      switchToList: function() {
-        this.change_screen('article-list-component');
-      },
       createArticle: function() {
         const {
           title,

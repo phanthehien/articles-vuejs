@@ -2,16 +2,14 @@ Vue.component(
   'article-edit-component',
   {
     template: '#articleEdit',
-    props: ['articles', 'change_screen', 'article', 'save_articles'],
+    mixins: [article_mixins.article_item],
+    props: ['article'],
     data() {
       return {
         errorMessage: ''
       }
     },
     methods: {
-      switchToList: function() {
-        this.change_screen('article-list-component');
-      },
       saveArticle: function() {
         const {
           title,
