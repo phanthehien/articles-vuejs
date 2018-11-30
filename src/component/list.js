@@ -22,7 +22,22 @@ Vue.component(
         return this.paging_info ? Number(this.paging_info.currentPaging) : 0;
       },
       numberOfListLabel() {
-        return `Number of Items: ${this.numberOfList}`;
+        return `Current: ${this.numberOfList}`;
+      },
+      rangeLabel() {
+        const from = this.currentPaging * this.numberOfList + 1;
+        const to = Math.min(from + this.numberOfList - 1, this.articles.length);
+
+        if (from < to) {
+          return `Items ${from} to ${to}`;
+        } else if (from === to) {
+          return `Item ${from}`;
+        } else {
+          return ``;
+        }
+      },
+      pagingNumbers() {
+        return this.pagingValues;
       },
       paginationItems() {
         const paginationItems = [];
@@ -66,37 +81,10 @@ Vue.component(
         this.change_screen('article-edit-component', article);
       },
       handleActions: function() {
-        if (event.target && event.target.dataset) {
-          const { id, action } = event.target.dataset;
-          const article = this.articles.find(article => article.id === id);
-
-          switch (action) {
-            case 'actionEdit':
-              this.switchToEdit(article);
-              break;
-
-            case 'actionDelete':
-              this.deleteArticle(article);
-              break;
-
-            default:
-              if (event.currentTarget && event.currentTarget.dataset) {
-                const { id, action } = event.currentTarget.dataset;
-                const article = this.articles.find(article => article.id === id);
-
-                switch(action) {
-                  case 'actionViewRow':
-                  case 'actionView':
-                    this.switchToView(article);
-                    break;
-
-                  default:
-                    break
-                }
-
-              }
-              break;
-          }
+        // check for the child component first then
+        // if not then check for current component
+        if(!this._handleAction(event.target)) {
+          this._handleAction(event.currentTarget);
         }
       },
       handlePaginationClick: function () {
@@ -104,7 +92,7 @@ Vue.component(
           const { index, action } = event.target.dataset;
 
           switch (action) {
-            case 'actionDropdown':
+            case 'actionNumberOfList':
               this.update_paging({
                 numberOfList: parseInt(index),
                 currentPaging: 0
@@ -116,7 +104,6 @@ Vue.component(
                 numberOfList: this.numberOfList,
                 currentPaging: parseInt(index - 1)
               });
-
               break;
 
             default:
@@ -133,7 +120,36 @@ Vue.component(
           this.articles.splice(index, 1);
           this.save_articles();
         }
-      }
+      },
+      _handleAction: function(target) {
+        if (target && target.dataset) {
+          const { id, action } = target.dataset;
+          const article = this.articles.find(article => article.id === id);
+
+          switch (action) {
+            case 'actionEdit':
+              this.switchToEdit(article);
+              return true;
+              break;
+
+            case 'actionDelete':
+              this.deleteArticle(article);
+              return true;
+              break;
+
+            case 'actionViewRow':
+              this.switchToView(article);
+              return true;
+              break;
+
+            default:
+              return false;
+              break;
+          }
+        }
+
+        return false;
+      },
     }
   }
 );

@@ -11,8 +11,9 @@ new Vue({
     this.articles = articleDB ? JSON.parse(articleDB) : db.articles;
 
     const appState = this._getInitState();
-    this._initScreen(appState);
+    this._replaceScreen(appState);
 
+    // this one to handle the back/forward buttons in browser
     window.addEventListener('hashchange', this._handleHashChange);
   },
   beforeDestroy: function () {
@@ -29,6 +30,7 @@ new Vue({
       this._replaceScreen(screenState);
     },
     updatePaging: function (updatePaging) {
+      // updating paging info in the screen
       const { numberOfList, currentPaging } = updatePaging;
 
       if (
@@ -45,9 +47,6 @@ new Vue({
     },
     saveArticles: function () {
       window.localStorage.setItem('articleDB', JSON.stringify(this.articles));
-    },
-    _initScreen: function (screenState) {
-      this._replaceScreen(screenState);
     },
     _getStateFromHash: function () {
       const urlHash = util.getHash(window.location.hash);
@@ -82,10 +81,11 @@ new Vue({
         article = this.articles.find(article => article.id === articleId);
       }
 
-      window.location.hash = hashState;
       this.currentComponent = component;
       this.article = article;
       this.pagingInfo = pagingInfo;
+
+      window.location.hash = hashState;
     },
     _handleHashChange: function (e) {
       if (window.location.hash) {
@@ -94,6 +94,7 @@ new Vue({
       }
     },
     _screenStateToUrlString: function(screenState) {
+      // converting screenState to url String
       const { component, articleId, pagingInfo } = screenState;
 
       let url = `component=${component}`;
@@ -110,6 +111,7 @@ new Vue({
       return url;
     },
     _urlStringToScreenState: function(url) {
+      // converting urlString to screenState
 
       if (url) {
         let screenState = {};

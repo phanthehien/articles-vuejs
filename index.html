@@ -91,12 +91,12 @@
         <button class="pagination-label-btn">{{numberOfListLabel}}</button>
         <div class="dropdown-content">
           <p
-              :class="{ selected: pagingValue === numberOfList }"
-              v-for="pagingValue in pagingValues"
-              :key="pagingValue"
-              :data-index="pagingValue"
-              data-action="actionDropdown">
-            {{pagingValue}}
+              :class="{ selected: pagingNumber === numberOfList }"
+              v-for="pagingNumber in pagingNumbers"
+              :key="pagingNumber"
+              :data-index="pagingNumber"
+              data-action="actionNumberOfList">
+            {{pagingNumber}}
           </p>
         </div>
       </div>
@@ -110,6 +110,7 @@
           {{paginationItem}}
         </a>
       </div>
+      <span>{{rangeLabel}}</span>
     </div>
   </div>
 </template>
