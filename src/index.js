@@ -1,17 +1,14 @@
 new Vue({
   el: '#app',
   data: {
-    articles: db.articles,
+    articles: null,
     currentComponent: null,
     article: null,
     pagingInfo: {}
   },
   created: function () {
-    const articleDB = window.localStorage.getItem('articleDB');
-    this.articles = articleDB ? JSON.parse(articleDB) : db.articles;
-
-    const appState = this._getInitState();
-    this._replaceScreen(appState);
+    this.articles = db.getArticles();
+    this._initScreen();
 
     // this one to handle the back/forward buttons in browser
     window.addEventListener('hashchange', this._handleHashChange);
@@ -47,6 +44,10 @@ new Vue({
     },
     saveArticles: function () {
       window.localStorage.setItem('articleDB', JSON.stringify(this.articles));
+    },
+    _initScreen: function() {
+      const appState = this._getInitState();
+      this._replaceScreen(appState);
     },
     _getStateFromHash: function () {
       const urlHash = util.getHash(window.location.hash);

@@ -31,13 +31,16 @@ Vue.component(
           return;
         }
 
+        const now = util.getNow();
+
         const article = {
           id: util.guid(),
           title: title,
           content: content,
           author: author,
           email: email,
-          updatedDate: util.formatDate(new Date()),
+          updatedDate: now,
+          createdDate: now,
           viewCount: 0
         };
 

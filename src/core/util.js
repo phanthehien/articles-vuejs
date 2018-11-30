@@ -1,4 +1,7 @@
 const util = {
+    getNow() {
+      return Date.now();
+    },
     guid: function () {
       const s4 = () => Math.floor((1 + Math.random()) * 0x10000)
         .toString(16)

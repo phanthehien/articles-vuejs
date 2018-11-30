@@ -37,7 +37,7 @@ Vue.component(
           article.content = content;
           article.author = author;
           article.email = email;
-          article.updatedDate = util.formatDate(new Date());
+          article.updatedDate = util.getNow();
           this.save_articles();
           this.switchToList();
         }
